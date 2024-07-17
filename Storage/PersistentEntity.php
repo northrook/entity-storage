@@ -53,7 +53,7 @@ abstract class PersistentEntity implements PersistentEntityInterface
         }
     }
 
-    abstract public static function hydrate( array $resource ) : self;
+    abstract public static function hydrate( array $entityArray ) : self;
 
     final public function save() : void {
 

@@ -43,7 +43,7 @@ class PersistentStorageManager
         $data  = $this->loadPersistentResource( $name );
         $store = $data[ 'generator' ] ?? false;
 
-        if ( is_subclass_of( $store, PersistentEntityInterface::class, true ) ) {
+        if ( is_subclass_of( $store, PersistentEntityInterface::class ) ) {
             dump( $store );
             return $this->loadedDataStores[ $name ] ??= $store::hydrate( $data );
         }

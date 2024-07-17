@@ -6,7 +6,7 @@ namespace Northrook\Storage;
 
 interface PersistentEntityInterface
 {
-    public static function hydrate( array $resource ) : self;
+    public static function hydrate( array $entityArray ) : self;
 
     public function save() : void;
 

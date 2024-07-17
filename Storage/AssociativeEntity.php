@@ -33,8 +33,8 @@ class AssociativeEntity extends PersistentEntity implements IteratorAggregate, C
         return $this;
     }
 
-    public static function hydrate( array $resource ) : PersistentEntity {
-        $store           = new static( $resource[ 'name' ], $resource[ 'data' ] );
+    public static function hydrate( array $entityArray ) : PersistentEntity {
+        $store           = new static( $entityArray[ 'name' ], $entityArray[ 'data' ] );
         $store->readonly = false;
         return $store;
     }
