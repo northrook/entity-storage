@@ -11,9 +11,11 @@ use Northrook\Logger\Log;
 use Northrook\PersistentStorageManager;
 use Symfony\Component\VarExporter\Exception\ExceptionInterface;
 use Symfony\Component\VarExporter\VarExporter;
-use function Northrook\Core\hashKey;
-use function Northrook\Core\normalizeKey;
-use function Northrook\Core\normalizePath;
+use function Northrook\{
+    hashKey,
+    normalizeKey,
+    normalizePath,
+};
 
 abstract class PersistentEntity implements PersistentEntityInterface
 {
@@ -52,6 +54,8 @@ abstract class PersistentEntity implements PersistentEntityInterface
             $this->save();
         }
     }
+
+    protected function onSave() : void {}
 
     abstract public static function hydrate( array $entityArray ) : self;
 

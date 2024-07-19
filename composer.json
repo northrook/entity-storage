@@ -21,7 +21,8 @@
     "ext-zend-opcache": "*",
     "northrook/core": "dev-main",
     "northrook/filesystem": "dev-main",
-    "symfony/var-exporter": "@stable"
+    "symfony/var-exporter": "@stable",
+    "northrook/compressor": "dev-main"
   },
   "require-dev": {
     "northrook/dev-env": "dev-main"

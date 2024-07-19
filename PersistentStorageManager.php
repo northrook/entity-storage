@@ -7,9 +7,11 @@ use Northrook\Storage\PersistentEntityInterface;
 use Northrook\Core\Trait\SingletonClass;
 use Northrook\Filesystem\File;
 use Northrook\Logger\Log;
-use function Northrook\Core\getProjectRootDirectory;
-use function Northrook\Core\normalizeKey;
-use function Northrook\Core\normalizePath;
+use function Northrook\{
+    getProjectRootDirectory,
+    normalizeKey,
+    normalizePath,
+};
 
 class PersistentStorageManager
 {
@@ -44,7 +46,6 @@ class PersistentStorageManager
         $store = $data[ 'generator' ] ?? false;
 
         if ( is_subclass_of( $store, PersistentEntityInterface::class ) ) {
-            dump( $store );
             return $this->loadedDataStores[ $name ] ??= $store::hydrate( $data );
         }
         else {
