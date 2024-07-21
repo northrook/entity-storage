@@ -2,6 +2,7 @@
 
 namespace Northrook;
 
+use Northrook\Resource\Path;
 use Northrook\Storage\PersistentEntity;
 use Northrook\Storage\PersistentEntityInterface;
 use Northrook\Core\Trait\SingletonClass;
@@ -42,6 +43,10 @@ class PersistentStorageManager
      */
     public function getResource( string $name ) : ?object {
 
+        if ( isset( $this->loadedDataStores[ $name ] ) ) {
+            return $this->loadedDataStores[ $name ];
+        }
+
         $data  = $this->loadPersistentResource( $name );
         $store = $data[ 'generator' ] ?? false;
 
@@ -75,13 +80,13 @@ class PersistentStorageManager
         if ( !$dataFile->exists ) {
             return null;
         }
-        return include $dataFile;
+        return include $dataFile->path;
         // return $this->loadedDataStores[ $name ] ??= require_once $dataFile->path;
     }
 
-    private function getResourcePath( string $name ) : File {
-        $filename = normalizeKey( $name );
-        return new File( "$this->storageDirectory/$filename" . PersistentEntity::FILE_EXTENSION );
+    private function getResourcePath( string $name ) : Path {
+        $filename = PersistentEntity::getFileName( $name );
+        return new Path( "$this->storageDirectory/$filename" );
     }
 
     public static function getStorageDirectory() : string {

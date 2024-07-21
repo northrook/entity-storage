@@ -19,7 +19,7 @@ use function Northrook\{
 
 abstract class PersistentEntity implements PersistentEntityInterface
 {
-    public const FILE_EXTENSION = '.resource.php';
+    public const FILE_EXTENSION = '.entity.php';
 
     private readonly string $storageDirectory;
     private readonly string $filename;
@@ -49,7 +49,6 @@ abstract class PersistentEntity implements PersistentEntityInterface
         if ( $this->readonly || !$this->autosave ) {
             return;
         }
-        dump( 'Autosave' );
         if ( $this->hash !== $this->dataHash() ) {
             $this->save();
         }
@@ -118,10 +117,13 @@ abstract class PersistentEntity implements PersistentEntityInterface
         }
     }
 
+    public static function getFileName( string $name ) : string {
+        return normalizeKey( $name . self::FILE_EXTENSION );
+    }
+
     final public function getFilePath() : string {
-        $filename = normalizeKey( $this->name );
         return $this->filename ??= normalizePath(
-            "$this->storageDirectory/$filename" . PersistentEntity::FILE_EXTENSION,
+            "$this->storageDirectory/{$this::getFileName( $this->name )}",
         );
     }
 
