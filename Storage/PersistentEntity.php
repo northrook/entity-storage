@@ -11,11 +11,7 @@ use Northrook\Logger\Log;
 use Northrook\PersistentStorageManager;
 use Symfony\Component\VarExporter\Exception\ExceptionInterface;
 use Symfony\Component\VarExporter\VarExporter;
-use function Northrook\{
-    hashKey,
-    normalizeKey,
-    normalizePath,
-};
+use function Northrook\{classBasename, hashKey, normalizeKey, normalizePath};
 
 abstract class PersistentEntity implements PersistentEntityInterface
 {
@@ -31,7 +27,7 @@ abstract class PersistentEntity implements PersistentEntityInterface
     public readonly string $name;
 
     public function __construct(
-        ?string        $name,
+        ?string        $name = null,
         mixed          $data = null,
         protected bool $readonly = false,
         protected bool $autosave = false,
@@ -138,6 +134,7 @@ abstract class PersistentEntity implements PersistentEntityInterface
 
 
     private function resourceName( ?string $string ) : void {
+        $string     ??= classBasename( $this );
         $this->name = class_exists( $string ) ? $string : normalizeKey( $string );
     }
 
