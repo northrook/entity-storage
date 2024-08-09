@@ -2,9 +2,12 @@
 
 declare( strict_types = 1 );
 
-namespace Northrook\Storage;
+namespace Northrook\Entity;
 
-use ArrayIterator, IteratorAggregate, Traversable, Countable;
+use ArrayIterator;
+use Countable;
+use IteratorAggregate;
+use Traversable;
 
 class AssociativeEntity extends PersistentEntity implements IteratorAggregate, Countable
 {

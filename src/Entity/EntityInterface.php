@@ -2,9 +2,9 @@
 
 declare( strict_types = 1 );
 
-namespace Northrook\Storage;
+namespace Northrook\Entity;
 
-interface PersistentEntityInterface
+interface EntityInterface
 {
     public static function hydrate( array $entityArray ) : self;
 

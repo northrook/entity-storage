@@ -2,7 +2,7 @@
 
 declare( strict_types = 1 );
 
-namespace Northrook\Storage;
+namespace Northrook\Entity;
 
 use InvalidArgumentException;
 use Northrook\Core\Timestamp;
@@ -13,7 +13,7 @@ use Symfony\Component\VarExporter\Exception\ExceptionInterface;
 use Symfony\Component\VarExporter\VarExporter;
 use function Northrook\{classBasename, hashKey, normalizeKey, normalizePath};
 
-abstract class PersistentEntity implements PersistentEntityInterface
+abstract class PersistentEntity implements EntityInterface
 {
     public const FILE_EXTENSION = '.entity.php';
 

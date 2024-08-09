@@ -4,12 +4,10 @@ declare( strict_types = 1 );
 
 namespace Northrook;
 
-use Northrook\Resource\Path;
-use Northrook\Storage\PersistentEntity;
-use Northrook\Storage\PersistentEntityInterface;
 use Northrook\Core\Trait\SingletonClass;
-use Northrook\Filesystem\File;
-use Northrook\Logger\Log;
+use Northrook\Entity\PersistentEntity;
+use Northrook\Entity\EntityInterface;
+use Northrook\Resource\Path;
 use Psr\Log\LoggerInterface;
 
 final class PersistentStorageManager
@@ -76,7 +74,7 @@ final class PersistentStorageManager
         $data  = $this->loadPersistentResource( $name );
         $store = $data[ 'generator' ] ?? false;
 
-        if ( \is_subclass_of( $store, PersistentEntityInterface::class ) ) {
+        if ( \is_subclass_of( $store, EntityInterface::class ) ) {
             return $this->loadedDataStores[ $name ] ??= $store::hydrate( $data );
         }
         else {
